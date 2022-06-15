@@ -47,7 +47,7 @@ public class PhoneDao {
       return personList;
    }
    
-   //사람추가
+   //추가
    public int personInsert(PersonVo personVo) {
 	   System.out.println("phoneDao > personInsert()"); 
 	   
@@ -55,7 +55,7 @@ public class PhoneDao {
 	   return count;
    }
    
-   
+   //삭제
    public int personDelete(int no) {
 	   System.out.println("phoneDao > personDelete()");
 	   
@@ -64,6 +64,7 @@ public class PhoneDao {
 	   return count;
    }
    
+   //변경
    public int personUpdate(PersonVo personVo) {
 	   System.out.println("phoneDao > personUpdate()");
 	   
@@ -72,6 +73,7 @@ public class PhoneDao {
 	   return count;
    }
    
+   //1명 정보불러오기
    public PersonVo getPerson(int no) {
 	   System.out.println("phoneDao > getPerson()");
 	   

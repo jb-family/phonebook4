@@ -1,6 +1,8 @@
 package com.javaex.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,22 +24,40 @@ public class PhoneService {
 	//메소드 - 일반
 	public List<PersonVo> getPersonList() {
 		//코드작성
-		System.out.println("PhoneController > list()");
+		System.out.println("PhoneService > getPersonList()");
 		List<PersonVo> personList = phoneDao.getPersonList();
 		return personList;
 	}
 	
 	public int insert(PersonVo personVo) {
 		//코드작성
-		System.out.println("PhoneController > insert()");
+		System.out.println("PhoneService > insert()");
 		int count = phoneDao.personInsert(personVo);
 		
 		return count;
 	}
 	
+	//전화번호 등록(map을 사용하는 가상의 상황 : 문법설명)
+	public int personInsert2() {
+		System.out.println("PhoneService>personInsert2()");
+		//map을 만들어 사용한다 
+		Map<String, String> pMap = new HashMap<String, String>();
+		
+		pMap.put("name", "황일영");
+		pMap.put("hp", "010-3333-3333");
+		pMap.put("company", "02-3333-3333");
+		
+		int count = phoneDao.personInsert2(pMap);
+		
+		return count;
+		
+	}
+	
+	
+	
 	public int update(PersonVo personVo) {
 		//코드작성
-		System.out.println("PhoneController > update()");
+		System.out.println("PhoneService > update()");
 		int count = phoneDao.personUpdate(personVo);
 		
 		return count;
@@ -45,15 +65,25 @@ public class PhoneService {
 	
 	public PersonVo getPerson(int no) {
 		//코드작성
-		System.out.println("PhoneController > getPerson()");
+		System.out.println("PhoneService > getPerson()");
 		PersonVo personVo = phoneDao.getPerson(no);
+		
 		
 		return personVo;
 	}
 	
+	//map
+	public Map<String, Object> getPerson2(int no) {
+		System.out.println("PhoneService > getPerson2()");
+		Map<String, Object> pMap = phoneDao.getPerson2(no);
+		
+		return pMap;
+	}
+	
+	
 	public int delete(int personId) {
 		//코드작성
-		System.out.println("PhoneController > delete()");
+		System.out.println("PhoneService > delete()");
 		int count = phoneDao.personDelete(personId);
 		
 		return count;

@@ -1,12 +1,7 @@
 package com.javaex.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
-
-import javax.sql.DataSource;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,22 +16,7 @@ public class PhoneDao {
    private SqlSession sqlSession;
    
    
-   
-   @Autowired
-   private DataSource dataSource;
-   
-   
-   // 0. import java.sql.*;
-   private Connection conn = null;
-   private PreparedStatement pstmt = null;
-   private ResultSet rs = null;
 
-   private String driver = "oracle.jdbc.driver.OracleDriver";
-   private String url = "jdbc:oracle:thin:@localhost:1521:xe";
-   private String id = "phonedb";
-   private String pw = "phonedb";
-   
-   
    //리스트
    public List<PersonVo> getPersonList() {
       System.out.println("phoneDao > getPersonList()");
@@ -55,20 +35,20 @@ public class PhoneDao {
 	   return count;
    }
    
+   //map추가하는 메소드
+   public int personInsert2(Map<String, String> pMap) {
+	   
+	   
+	   int count = sqlSession.insert("phonebook.personInsert2",pMap);
+	   
+	   return count;
+   }
+   
    //삭제
    public int personDelete(int no) {
 	   System.out.println("phoneDao > personDelete()");
 	   
 	   int count = sqlSession.delete("phonebook.personDelete", no);
-	   
-	   return count;
-   }
-   
-   //변경
-   public int personUpdate(PersonVo personVo) {
-	   System.out.println("phoneDao > personUpdate()");
-	   
-	   int count = sqlSession.update("phonebook.personUpdate", personVo);
 	   
 	   return count;
    }
@@ -81,6 +61,25 @@ public class PhoneDao {
 	   
 	   return person;
    }
+   //map추가하는 메소드
+   public Map<String, Object> getPerson2(int no) {
+	   System.out.println("phoneDao > getPerson2()");
+	   
+	   Map<String, Object> pMap = sqlSession.selectOne("phonebook.getPerson2", no);
+	  System.out.println("pomapppp"+pMap);
+	   return pMap;
+   }
+   
+   
+   //변경
+   public int personUpdate(PersonVo personVo) {
+	   System.out.println("phoneDao > personUpdate()");
+	   
+	   int count = sqlSession.update("phonebook.personUpdate", personVo);
+	   
+	   return count;
+   }
+   
    
    
 }
